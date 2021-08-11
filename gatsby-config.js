@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://www.yourdomain.tld",
+    siteUrl: "https://nponta.info",
     title: "Life in the Fast Lane",
   },
   plugins: [],
