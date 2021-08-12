@@ -48,12 +48,12 @@ exports.createPages = async function({ actions, graphql }) {
             context: {
                 id: node.id,
                 previous: {
-                    title: previous?.frontmatter.title,
-                    name: previous?.parent.name
+                    title: previous ? previous.frontmatter.title : undefined,
+                    name: previous ? previous.parent.name : undefined,
                 },
                 next: {
-                    title: next?.frontmatter.title,
-                    name: next?.parent.name
+                    title: next ? next.frontmatter.title : undefined,
+                    name: next ? next.parent.name : undefined
                 }
             }
         })
