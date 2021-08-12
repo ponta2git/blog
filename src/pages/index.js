@@ -1,18 +1,39 @@
 import React from "react"
+import { useStaticQuery, graphql } from "gatsby"
+
+import { Layout } from '../components/layout' 
+import { Excerpt } from "../components/excerpt"
 
 // markup
 const IndexPage = () => {
-    return (<React.Fragment>
-        <main>
-            <h1>Life in the Fast Lane</h1>
-            <h2>工事中</h2>
-            <p>現在、改装工事中です。そのうち再開します。</p>
-        </main>
-        <footer>
-            <p>(C) 2021 ponta.</p>
-        </footer>
-    </React.Fragment>
-    )
+    const data = useStaticQuery(graphql`
+        query {
+            allMdx(sort: {fields: frontmatter___date, order: DESC}) {
+                nodes {
+                    id
+                    frontmatter {
+                        date(formatString: "YYYY/MM/DD")
+                        tags
+                        title
+                    }
+                    excerpt(truncate: true, pruneLength: 50)
+                    parent {
+                        ... on File {
+                            name
+                        }
+                    }
+                }
+            }
+        }
+    `)
+    const { nodes } = data.allMdx;
+
+    return <Layout>
+        <div className="flex flex-col gap-y-6 mb-4">
+            { nodes.map(node => <Excerpt key={node.id} data={node} />) }
+        </div>
+        
+    </Layout>
 }
 
 export default IndexPage

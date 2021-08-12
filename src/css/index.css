@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "@fontsource/hahmlet/300.css";
+
+body {
+    @apply text-gray-700;
+}
+
+h1 {
+    font-family: "Hahmlet";
+}
+
+.article h3 {
+    @apply font-bold;
+}
+
+.article code {
+    @apply tracking-normal font-mono text-sm px-2;
+}
+
+.article dt {
+    @apply font-bold;
+}
+
+.article dd {
+    @apply ml-4;
+}
+
+.article small {
+    
+}
