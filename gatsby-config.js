@@ -4,6 +4,15 @@ module.exports = {
     title: "Life in the Fast Lane",
   },
   plugins: [
+    `gatsby-plugin-sitemap`,
+    {
+        resolve: "gatsby-plugin-google-gtag",
+        options: {
+          trackingIDs: [
+            "UA-70663571-2"
+          ]
+        }
+    },
     `gatsby-plugin-postcss`,
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
