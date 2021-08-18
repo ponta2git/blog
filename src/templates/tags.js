@@ -11,7 +11,9 @@ const Tags = ({ data, pageContext }) => {
 
     return <Layout pageTitle={tag}>
         <p className="mb-6">一覧：<FontAwesomeIcon icon={faTag} />&nbsp;{tag}</p>
-        {edges.map(e => <Excerpt key={e.node.id} data={e.node}/>)}       
+        <div className="flex flex-col gap-y-6 mb-4">
+            {edges.map(e => <Excerpt key={e.node.id} data={e.node}/>)}       
+        </div>
     </Layout>
 }
 

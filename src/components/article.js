@@ -1,10 +1,16 @@
 import React from 'react'
 import { Link } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
+import { MDXProvider } from '@mdx-js/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTags, faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import CodeBlock from './codeblock';
 
 export const Article = ({ name, date, tags, title, body, next, previous, isExcerpt }) => {
+    const mdxComponents = {
+        code: CodeBlock
+    };
+
     return (
         <article className="article">
             <h2 className="text-2xl text-gray-800 mb-2 tracking-wide font-bold">
@@ -26,8 +32,10 @@ export const Article = ({ name, date, tags, title, body, next, previous, isExcer
             
             {isExcerpt
                 ? <p className="leading-relaxed">{body}</p>
-                : <div className="leading-relaxed flex flex-col gap-y-6 mt-6">
-                     <MDXRenderer>{body}</MDXRenderer>    
+                : <div className="leading-relaxed flex flex-col gap-y-6 mt-6 content">
+                    <MDXProvider components={mdxComponents}>
+                        <MDXRenderer>{body}</MDXRenderer>
+                    </MDXProvider>
                 </div>
             }
             

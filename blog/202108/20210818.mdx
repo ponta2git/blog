@@ -1,0 +1,98 @@
+---
+title: "GatsbyJSにおけるslugを使わないURLの検討"
+date: "2021-08-18"
+tags: ["コンピュータ"]
+---
+
+GatsbyJSの公式チュートリアルをみていると、slugという文字列を各記事のURLに使っているのが見受けられます。slugは、記事の内容をKebab Caseなんかで端的に表した文字列です。これを使うことで、SEO的に良い効果が得られるそうです。
+
+ただ、英語圏なら記事のタイトルとslugがある程度似ていて作りやすいのかもしれませんが、日本語だと、日本語URLにするかタイトルを翻訳する必要が出てきて、面倒臭い……。また、日本語URLにするくらいなら、タイトルそのままでURLにすりゃよくない？とか思ったりもして、なんだかな……と。
+
+そんなわけで、記事に対するslugを使わないURLの割り当てを検討することにしました。なお、記事は、ローカルにmdxファイルで保管されているものとします。
+
+個人的に一番簡単なのは、日付です。日付は今の所どの記事にもとりあえずつけているので、使わない手はないです。`gatsby-node.js`は、こんな感じになりそう。
+
+```jsx
+exports.createPages = async function({ actions, graphql }) {
+    const { data } = await graphql(`
+        query {
+            allMdx(sort: { fields: frontmatter___date, order: ASC }) {
+                edges {
+                    node {
+                        id
+                        frontmatter {
+                            date(formatString: "YYYYMMDD")
+                        }
+                    }
+                }
+            }
+        }
+    `)
+
+    data.edges.forEach(({ node }) => {
+        actions.createPage({
+            path: `/blog/${node.frontmatter.date}`,
+            context: {
+                id: node.id
+            }
+
+// ...
+```
+
+対応するテンプレートのページクエリは、こんな感じ？
+
+```jsx
+export const query = graphql`
+    query ($id: String) {
+        mdx(id: {eq: $id}) {
+            frontmatter {
+                date(formatString: "YYYY/MM/DD")
+                title
+            }
+            body
+        }
+    }
+`
+```
+
+これが一番シンプルかと思います。`createPage`に使う日付はURLになるので、スラッシュを入れないようにフォーマットしています。
+
+もうこれでええやん、という気持ちにもなるんですが、これだと1日に2記事以上書いた時にぶっ壊れます。当たり前ですが、日付が衝突してしまいます。ここで、1日1記事しかかかん！という誓いを立てるのもいいと思います。とはいえ、記事はモチベがある時に~~でっち上げて~~書いてしまいたいものです。
+
+そこで思いついたのが、mdxファイルの名前に日付とその日の記事番号を入れてしまい、ファイル名からURLを作るという方法です。例えば、2021年8月18日の最初の記事なら`20210818.mdx`、2番目の記事には`20210818_2.mdx`と名付けてしまい、その名前部分をそのまま使ってしまおうということです。
+
+`gatsby-node.js`はこんな感じです。
+
+```jsx
+exports.createPages = async function({ actions, graphql }) {
+    const { data } = await graphql(`
+        query {
+            allMdx(sort: { fields: frontmatter___date, order: ASC }) {
+                edges {
+                    node {
+                        id
+                        parent {
+                            ... on File {
+                                name
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    `)
+
+    data.edges.forEach(({ node }) => {
+        actions.createPage({
+            path: `/blog/${node.parent.name}`,
+
+// ...
+```
+
+`node`の中に`parent`があり、さらにその中にファイル情報があって、`name`という要素が拡張子なしのファイル名になります。それをそのまま仕込んでしまえば良いわけです。このブログでは、この手法を採用しています。ファイル名はどうせつけなきゃいけないものだし`frontmatter`にslugを手でシコシコ入れる手間に比べれば楽かなぁ、と思っています。
+
+ファイル名を使うという発想は、さまざまな人が実現しているようです。例えば、[ファイル名からslugを自動生成するもの](https://qiita.com/hththt/items/a6a6fa7d2ee90b0cd854)なんかがあります。こちらは`onCreateNode`にファイル名から各ノードのslugを自動生成する処理を記述して、GraphQLからそのslugを取ってきてURLとする方法です。記述量は、少々多いかも。
+
+軽く調べたところ、この方法を使っているサイトが他に見当たらなかったので、備忘録として残しておきます。新しい内容なのかな？
+
+ひとまずこれでslugを作る手間なしにURLを作れて、分かりやすく管理できるようになりました。あとは記事を書くだけ……ネタ……

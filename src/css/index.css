@@ -27,6 +27,24 @@ h1 {
     @apply ml-4;
 }
 
-.article small {
-    
+.article .content a {
+    @apply text-red-700;
+}
+
+pre {
+    @apply relative text-sm;
+}
+
+.prism-code {
+    @apply w-full p-2 pr-0 overflow-y-auto tracking-normal font-mono;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.prism-code::after {
+    content: "";
+    background-color: #f6f8fa;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    @apply w-2 absolute right-0 top-0 block h-full;
 }
