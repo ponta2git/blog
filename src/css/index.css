@@ -36,7 +36,8 @@ pre {
 }
 
 .prism-code {
-    @apply w-full p-2 pr-0 overflow-y-auto tracking-normal font-mono;
+    @apply p-2 pr-0 overflow-y-auto tracking-normal font-mono;
+    width: calc(100% - 0.5rem);
     border-top-left-radius: 0.25rem;
     border-bottom-left-radius: 0.25rem;
 }
