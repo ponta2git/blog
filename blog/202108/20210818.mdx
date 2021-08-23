@@ -29,7 +29,7 @@ exports.createPages = async function({ actions, graphql }) {
         }
     `)
 
-    data.edges.forEach(({ node }) => {
+    data.allMdx.edges.forEach(({ node }) => {
         actions.createPage({
             path: `/blog/${node.frontmatter.date}`,
             context: {
@@ -82,7 +82,7 @@ exports.createPages = async function({ actions, graphql }) {
         }
     `)
 
-    data.edges.forEach(({ node }) => {
+    data.allMdx.edges.forEach(({ node }) => {
         actions.createPage({
             path: `/blog/${node.parent.name}`,
 

@@ -27,6 +27,10 @@ h1 {
     @apply ml-4;
 }
 
+.article ul {
+    @apply list-inside list-disc;
+}
+
 .article .content a {
     @apply text-red-700;
 }
