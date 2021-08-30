@@ -1,43 +1,93 @@
-import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import { Header } from "./header"
-import { Aside } from "./aside"
-import { Main } from "./main"
-import { Profile } from "./aside/profile"
-import { TagList } from "./aside/taglist"
+import React from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
+import tw, { GlobalStyles } from 'twin.macro'
+import Header from './header'
+import Profile from './elements/profile'
+import TagList from './elements/taglist'
+import Contents from './elements/contents'
+import Footer from './footer'
 
-export const Layout = ({ pageTitle, children }) => {
+const styleWrapper = tw`
+    relative
+    min-h-screen
+    pb-24
+`
+
+const styleContainer = tw`
+    w-11/12
+    md:w-4/5
+    lg:w-11/12
+    xl:w-8/12
+    mx-auto
+    my-6
+    pb-6
+    rounded
+    bg-gray-50
+    shadow-md
+`
+
+const styleDivider = tw`
+    mx-5
+    lg:mx-10
+    lg:flex
+    lg:flex-row
+    lg:justify-between
+`
+
+const styleMain = tw`
+    lg:w-2/3
+`
+
+const styleAside = tw`
+    mt-6
+    lg:mt-0
+    lg:w-1/4
+`
+
+
+
+const Layout = ({ children, pageTitle }) => {
     const data = useStaticQuery(graphql`
-        query {
-            site {
-                siteMetadata {
-                    title
-                }
-            }
-            allMdx {
-                group(field: frontmatter___tags) {
-                    fieldValue
-                    totalCount
-                }
+    query {
+        site {
+            siteMetadata {
+                title
             }
         }
+        allMdx {
+            group(field: frontmatter___tags) {
+                fieldValue
+                totalCount
+            }
+        }
+    }  
     `)
+    const { siteMetadata } = data.site
+    const tags = data.allMdx.group.sort((a, b) => b.totalCount - a.totalCount)
 
-    const { title } = data.site.siteMetadata;
-    const tags = data.allMdx.group.sort((a, b) => b.totalCount - a.totalCount);
-
-    return (
-        <div className="container lg:w-4/5 xl:w-2/3 mx-auto box-content pb-16">
-            <title>{!!pageTitle ? `${pageTitle} | ` : null}{title}</title>
-            <Header title={title} />
-            <div className="lg:flex lg:flex-row lg:flex-wrap lg:justify-center">
-                <Main>{children}</Main>
-                <Aside>
-                    <TagList tags={tags} />
-                    <Profile />
-                    <p className="text-right px-4">(C) 2021 ponta.</p>
-                </Aside>
+    return ( 
+        <div css={styleWrapper}>
+            <title>
+                {pageTitle ? `${pageTitle} | ` : null }{siteMetadata.title}
+            </title>
+            <GlobalStyles />
+            <div css={styleContainer}>
+                <Header siteName={siteMetadata.title} />
+                <div css={styleDivider}>
+                    <main css={styleMain}>
+                        {children}
+                    </main>
+                    <aside css={styleAside}>
+                        <Contents>
+                            <TagList tags={tags} />
+                            <Profile />
+                        </Contents> 
+                    </aside>
+                </div>
             </div>
+            <Footer />
         </div>
-    );
+    )
 }
+
+export default Layout;

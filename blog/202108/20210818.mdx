@@ -12,7 +12,7 @@ GatsbyJSの公式チュートリアルをみていると、slugという文字�
 
 個人的に一番簡単なのは、日付です。日付は今の所どの記事にもとりあえずつけているので、使わない手はないです。`gatsby-node.js`は、こんな感じになりそう。
 
-```jsx
+```jsx fileName=gatsby-node.js
 exports.createPages = async function({ actions, graphql }) {
     const { data } = await graphql(`
         query {
@@ -63,7 +63,7 @@ export const query = graphql`
 
 `gatsby-node.js`はこんな感じです。
 
-```jsx
+```jsx fileName=gatsby-node.js
 exports.createPages = async function({ actions, graphql }) {
     const { data } = await graphql(`
         query {

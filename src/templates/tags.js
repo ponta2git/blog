@@ -1,20 +1,29 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTag } from '@fortawesome/free-solid-svg-icons';
-import { Layout } from "../components/layout"
-import { Excerpt } from "../components/excerpt"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faTag } from '@fortawesome/free-solid-svg-icons'
+import Layout from "../components/layout"
+import Contents from "../components/elements/contents"
+import Excerpt from "../components/elements/excerpt"
 
 const Tags = ({ data, pageContext }) => {
     const { edges } = data.allMdx
     const { tag } = pageContext
 
-    return <Layout pageTitle={tag}>
-        <p className="mb-6">一覧：<FontAwesomeIcon icon={faTag} />&nbsp;{tag}</p>
-        <div className="flex flex-col gap-y-6 mb-4">
-            {edges.map(e => <Excerpt key={e.node.id} data={e.node}/>)}       
-        </div>
-    </Layout>
+    return (
+        <Layout>
+            <Contents>
+                <p><FontAwesomeIcon icon={faTag} /> {tag}</p>
+                {edges.map((edge, idx) => <Excerpt 
+                    key={idx}
+                    title={edge.node.frontmatter.title}
+                    date={edge.node.frontmatter.date}
+                    tags={edge.node.frontmatter.tags}
+                    excerpt={edge.node.excerpt}
+                    addr={edge.node.parent.name} />)}
+            </Contents>    
+        </Layout>
+    )
 }
 
 export const query = graphql`
