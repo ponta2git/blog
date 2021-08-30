@@ -36,7 +36,7 @@ const styleDescription = tw`
 
 const Profile = () => (
     <div css={styleProfile}>
-        <p><StaticImage src="../images/profile/logo.png" alt="ponta" /></p>
+        <p><StaticImage src="../../images/profile/logo.png" alt="ponta" /></p>
         <p css={styleName}>ponta</p>
         <ul css={styleSNSLinkList}>
             <li css={styleSNSLink}>
