@@ -17,13 +17,13 @@ const styleLink = tw`
 `
 
 const ArticlePager = ({ next, previous }) => (
-    <div style={styleArticlePager}>
-        {!!previous.name && <p style={styleLink}>
+    <div css={styleArticlePager}>
+        {!!previous.name && <p css={styleLink}>
             <Link to={`/blog/${previous.name}`}>
                 <FontAwesomeIcon icon={faAngleLeft} />&nbsp;{previous.title}
             </Link>
         </p>}
-        {!!next.name && <p style={styleLink}>
+        {!!next.name && <p css={styleLink}>
             <Link to={`/blog/${next.name}`}>
                 {next.title}&nbsp;<FontAwesomeIcon icon={faAngleRight} />
             </Link>
