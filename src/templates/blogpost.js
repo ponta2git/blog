@@ -43,13 +43,13 @@ const BlogPost = ({data, pageContext}) => {
                 tags={tags}
                 isPost={true}
             />
-        <artcle css={styleArticle}>
+        <article css={styleArticle}>
             <MDXProvider components={components}>
                 <MDXRenderer>
                     {body}
                 </MDXRenderer>
             </MDXProvider>
-        </artcle>
+        </article>
         <ArticlePager next={next} previous={previous} />
     </Layout>
 }
