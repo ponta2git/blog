@@ -13,18 +13,18 @@ const styleArticle = [tw`
     flex
     flex-col
     gap-y-6
-    py-2
+    py-5
     mt-2
     border-t-2
     border-b-2
-    border-dotted
+    border-double
 
 `, css({
     ul: tw`list-inside list-disc`,
     dt: tw`font-bold`,
-    h3: tw`font-bold pb-1 border-b-2 border-red-700 border-dotted -mb-4`,
+    h3: tw`font-bold border-b-2 border-dotted py-1`,
     code: tw`text-sm`,
-    a: tw`text-red-700 hover:text-red-900`
+    a: tw`text-red-700 hover:text-red-900 duration-200 transition-colors ease-in-out`
 })]
 
 const BlogPost = ({data, pageContext}) => {
@@ -41,7 +41,6 @@ const BlogPost = ({data, pageContext}) => {
                 title={title}
                 date={date}
                 tags={tags}
-                isPost={true}
             />
         <article css={styleArticle}>
             <MDXProvider components={components}>

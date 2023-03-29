@@ -1,6 +1,7 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import tw, { GlobalStyles } from 'twin.macro'
+import tw, { GlobalStyles, css } from 'twin.macro'
+import { Global } from "@emotion/react"
 import Header from './header'
 import Profile from './elements/profile'
 import TagList from './elements/taglist'
@@ -23,7 +24,7 @@ const styleContainer = tw`
     pb-6
     rounded
     bg-gray-50
-    shadow-md
+    shadow-lg
 `
 
 const styleDivider = tw`
@@ -71,6 +72,11 @@ const Layout = ({ children, pageTitle }) => {
                 {pageTitle ? `${pageTitle} | ` : null }{siteMetadata.title}
             </title>
             <GlobalStyles />
+            <Global styles={css`
+                body {
+                    ${tw`bg-gray-300 text-gray-700`}
+                }  
+            `} />
             <div css={styleContainer}>
                 <Header siteName={siteMetadata.title} />
                 <div css={styleDivider}>

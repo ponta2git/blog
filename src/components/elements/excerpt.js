@@ -4,10 +4,8 @@ import tw from 'twin.macro'
 import PostTitle from './posttitle'
 
 const style = tw`
-    p-2
-    border-l-4
-    border-red-700
-    hover:border-red-900
+    py-2
+    hover:text-gray-500
     transition-colors
     ease-in-out
     duration-200

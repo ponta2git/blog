@@ -1,9 +1,2 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
 @import "@fontsource/hahmlet/400.css";
-
-
-body {
-    @apply bg-gray-200 text-gray-700;
-}

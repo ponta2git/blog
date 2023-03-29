@@ -5,13 +5,17 @@ import tw, { css } from 'twin.macro'
 const styleHeader = tw`
     px-5
     lg:px-10
-    py-16
+    py-24
 `
 
 const styleText = [
     tw`
         tracking-tight
         text-2xl
+        hover:text-gray-500
+        duration-200
+        ease-in-out
+        transition-colors
     `,
     css`
         font-family : Hahmlet;

@@ -7,13 +7,6 @@ const stylePostTitle = tw`
     tracking-wide
 `
 
-const styleHeading = tw`
-    pl-2
-    border-l-4
-    border-red-700
-`
-
-
 const styleTitle = tw`
     text-lg
     leading-tight
@@ -34,8 +27,8 @@ const stylePostMeta = tw`
     my-1
 `
 
-const PostTitle = ({ title, date, tags, isPost }) => (
-    <div css={[stylePostTitle, isPost && styleHeading]}>
+const PostTitle = ({ title, date, tags }) => (
+    <div css={[stylePostTitle]}>
         <h2 css={styleTitle}>{title}</h2>
         <div css={stylePostMeta}>
             <p css={styleDate}>{date}</p>
