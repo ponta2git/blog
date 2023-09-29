@@ -1,2 +1,9 @@
-
 @import "@fontsource/hahmlet/400.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply subpixel-antialiased text-gray-800;
+}
