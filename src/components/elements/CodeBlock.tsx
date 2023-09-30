@@ -4,9 +4,13 @@ import { Highlight, themes } from "prism-react-renderer";
 type CodeBlockType = {
   className?: string;
   fileName?: string;
-}
+};
 
-const CodeBlock: React.FC<PropsWithChildren<CodeBlockType>> = ({ children, className, fileName }) => {
+const CodeBlock: React.FC<PropsWithChildren<CodeBlockType>> = ({
+  children,
+  className,
+  fileName,
+}) => {
   const language = className ? className.replace(/language-/, "") : "";
 
   return (
@@ -16,22 +20,27 @@ const CodeBlock: React.FC<PropsWithChildren<CodeBlockType>> = ({ children, class
           <p>{fileName}</p>
         </div>
       )}
-      <div className={`w-full rounded-lg bg-[${themes.okaidia.plain.backgroundColor}]`}>
+      <div
+        className={`w-full rounded-lg bg-[${themes.okaidia.plain.backgroundColor}]`}
+      >
         <Highlight
           code={children ? String(children).trim() : ""}
           language={language}
           theme={themes.okaidia}
         >
           {({ className, style, tokens, getLineProps, getTokenProps }) => (
-              <div className={`${className} text-xs font-mono overflow-x-auto rounded-lg p-3`} style={style}>
-                {tokens.map((line, tokens_idx) => (
-                  <div key={tokens_idx} {...getLineProps({ line })}>
-                    {line.map((token, lines_key) => (
-                      <span key={lines_key} {...getTokenProps({ token })} />
-                    ))}
-                  </div>
-                ))}
-              </div>
+            <div
+              className={`${className} text-xs font-mono overflow-x-auto rounded-lg p-3`}
+              style={style}
+            >
+              {tokens.map((line, tokens_idx) => (
+                <div key={tokens_idx} {...getLineProps({ line })}>
+                  {line.map((token, lines_key) => (
+                    <span key={lines_key} {...getTokenProps({ token })} />
+                  ))}
+                </div>
+              ))}
+            </div>
           )}
         </Highlight>
       </div>

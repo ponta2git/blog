@@ -16,6 +16,7 @@ export const Story: Story = {
     title: "記事タイトル",
     date: format(newJpDate(), "yyyy/MM/dd"),
     tags: ["tag1", "tag2"],
-    excerpt: "hogehogehogehogehoghopehg:poajr;giaernb;ioarniaoednbiaer:paeri:bp",
+    excerpt:
+      "hogehogehogehogehoghopehg:poajr;giaernb;ioarniaoednbiaer:paeri:bp",
   },
 };

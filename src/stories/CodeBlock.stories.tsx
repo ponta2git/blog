@@ -13,6 +13,6 @@ export const Story: Story = {
   args: {
     className: "typescript",
     fileName: "test.ts",
-    children: "hoge"
+    children: "hoge",
   },
 };
