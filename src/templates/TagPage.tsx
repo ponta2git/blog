@@ -14,29 +14,31 @@ const TagPage = ({
 }: PageProps<Queries.TagPageQuery, TagNodeContext>) => {
   const { edges } = data.allMdx;
   const { tag } = pageContext;
-  return <Layout pageTitle={`タグ：${tag}`}>
-    <Contents>
-      <p>
-        <FontAwesomeIcon icon={faTag} /> {tag}
-      </p>
-      {edges &&
-        edges.map((edge, idx) => {
-          const { frontmatter, excerpt, parent } = edge.node;
-          if (!frontmatter || !parent) return null;
+  return (
+    <Layout pageTitle={`タグ：${tag}`}>
+      <Contents>
+        <p>
+          <FontAwesomeIcon icon={faTag} /> {tag}
+        </p>
+        {edges &&
+          edges.map((edge, idx) => {
+            const { frontmatter, excerpt, parent } = edge.node;
+            if (!frontmatter || !parent) return null;
 
-          return (
-            <Excerpts
-              key={idx}
-              title={frontmatter?.title ?? ""}
-              date={frontmatter?.date ?? ""}
-              tags={frontmatter?.tags as ArticleTags ?? []}
-              excerpt={excerpt ?? ""}
-              addr={(parent as { name: string }).name}
-            />
-          );
-        })}
-    </Contents>
-  </Layout>;
+            return (
+              <Excerpts
+                key={idx}
+                title={frontmatter?.title ?? ""}
+                date={frontmatter?.date ?? ""}
+                tags={(frontmatter?.tags as ArticleTags) ?? []}
+                excerpt={excerpt ?? ""}
+                addr={(parent as { name: string }).name}
+              />
+            );
+          })}
+      </Contents>
+    </Layout>
+  );
 };
 
 export const query = graphql`

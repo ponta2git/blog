@@ -9,7 +9,7 @@ import { newJpDate } from "../utils/date";
 
 const year = format(newJpDate(), "yyyy");
 
-const Footer = () => (
+const Footer: React.FC = () => (
   <div className="absolute bottom-0 bg-gray-800 text-gray-400 w-full p-6 text-center border-t-2 border-gray-500">
     <ul className="flex flex-row items-center content-center justify-center gap-x-6">
       <li>

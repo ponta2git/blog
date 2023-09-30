@@ -8,7 +8,7 @@ import { ArticleTags } from "../node-types";
 
 const IndexPage = () => {
   const data = useStaticQuery<Queries.IndexPageQuery>(graphql`
-    query IndexPage{
+    query IndexPage {
       allMdx(sort: { frontmatter: { date: DESC } }) {
         edges {
           node {
@@ -31,7 +31,7 @@ const IndexPage = () => {
 
   const { edges } = data.allMdx;
 
-  console.log(edges[0].node.frontmatter?.tags)
+  console.log(edges[0].node.frontmatter?.tags);
 
   return (
     <Layout>
@@ -41,11 +41,11 @@ const IndexPage = () => {
             key={idx}
             title={edge.node.frontmatter?.title ?? ""}
             date={edge.node.frontmatter?.date ?? ""}
-            tags={edge.node.frontmatter?.tags as ArticleTags ?? []}
+            tags={(edge.node.frontmatter?.tags as ArticleTags) ?? []}
             excerpt={edge.node.excerpt ?? ""}
-            addr={(edge.node.parent as {name: string}).name}
+            addr={(edge.node.parent as { name: string }).name}
           />
-      ))}
+        ))}
       </Contents>
     </Layout>
   );
