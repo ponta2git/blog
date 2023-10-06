@@ -8,10 +8,10 @@ import Layout from "../components/Layout";
 import Contents from "../components/elements/Contents";
 import Excerpts from "../components/elements/Excerpts";
 
-const TagPage = ({
+const TagPage: React.FC<PageProps<Queries.TagPageQuery, TagNodeContext>> = ({
   data,
   pageContext,
-}: PageProps<Queries.TagPageQuery, TagNodeContext>) => {
+}) => {
   const { edges } = data.allMdx;
   const { tag } = pageContext;
   return (

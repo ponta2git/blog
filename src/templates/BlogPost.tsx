@@ -12,11 +12,11 @@ import Contents from "../components/elements/Contents";
 
 // const styleArticle = tw`leading-7 flex flex-col gap-y-6 py-5 mt-2 border-t-2 border-b-2 border-double`;
 
-const BlogPost = ({
+const BlogPost: React.FC<PageProps<Queries.BlogPostQuery, PageNodeContext>> = ({
   data,
   pageContext,
   children,
-}: PageProps<Queries.BlogPostQuery, PageNodeContext>) => {
+}) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { frontmatter } = data.mdx as { frontmatter: any };
   const { date, tags, title } = frontmatter;
@@ -55,7 +55,7 @@ const BlogPost = ({
       </div>
 
       <Contents>
-        <article className="leading-7 tracking-tight flex flex-col gap-y-4">
+        <article className="leading-7 tracking-wide flex flex-col gap-y-4">
           <MDXProvider components={components}>{children}</MDXProvider>
         </article>
       </Contents>

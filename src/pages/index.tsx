@@ -6,7 +6,7 @@ import Contents from "../components/elements/Contents";
 import Excerpts from "../components/elements/Excerpts";
 import { ArticleTags } from "../node-types";
 
-const IndexPage = () => {
+const IndexPage: React.FC = () => {
   const data = useStaticQuery<Queries.IndexPageQuery>(graphql`
     query IndexPage {
       allMdx(sort: { frontmatter: { date: DESC } }) {

@@ -4,8 +4,8 @@
   "private": true,
   "description": "Life in the Fast Lane",
   "scripts": {
-    "predevelop": "gatsby clean",
-    "develop": "gatsby develop",
+    "predev": "gatsby clean",
+    "dev": "gatsby develop",
     "prestart": "gatsby clean",
     "start": "gatsby develop",
     "prebuild": "gatsby clean",
@@ -14,7 +14,9 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src/ gatsby-*.ts",
+    "format": "prettier --write src/ gatsby-*.ts"
   },
   "dependencies": {
     "@fontsource/hahmlet": "^5.0.7",
