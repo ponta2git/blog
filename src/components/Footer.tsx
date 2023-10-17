@@ -3,7 +3,7 @@ import { format } from "date-fns";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 import { newJpDate } from "../utils/date";
 
@@ -22,8 +22,13 @@ const Footer: React.FC = () => (
           <FontAwesomeIcon icon={faTwitter} />
         </a>
       </li>
+      <li>
+        <a aria-label="github" href="https://github.com/ponta2git">
+          <FontAwesomeIcon icon={faGithub} />
+        </a>
+      </li>
     </ul>
-    <p className="mt-2">(C){year} ponta.</p>
+    <p className="text-xs mt-2">(C){year} ponta.</p>
   </div>
 );
 

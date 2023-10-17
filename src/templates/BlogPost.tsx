@@ -10,8 +10,6 @@ import ArticlePager from "../components/elements/ArticlePager";
 import { ArticleTags, PageNodeContext } from "../node-types";
 import Contents from "../components/elements/Contents";
 
-// const styleArticle = tw`leading-7 flex flex-col gap-y-6 py-5 mt-2 border-t-2 border-b-2 border-double`;
-
 const BlogPost: React.FC<PageProps<Queries.BlogPostQuery, PageNodeContext>> = ({
   data,
   pageContext,
@@ -51,11 +49,11 @@ const BlogPost: React.FC<PageProps<Queries.BlogPostQuery, PageNodeContext>> = ({
           {title}
         </h2>
         <p className="text-xs leading-tight text-gray-500">{date}</p>
-        <PostTags tags={tags as ArticleTags} />
+        <PostTags tags={tags satisfies ArticleTags} />
       </div>
 
       <Contents>
-        <article className="leading-7 tracking-wide flex flex-col gap-y-4">
+        <article className="mt-2 text-base leading-7 tracking-normal flex flex-col gap-y-4">
           <MDXProvider components={components}>{children}</MDXProvider>
         </article>
       </Contents>

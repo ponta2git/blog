@@ -12,7 +12,7 @@ const config: Config = {
     colors: {
       transparent: "transparent",
       current: "currentColor",
-      gray: Colors.neutral,
+      gray: Colors.stone,
       blue: Colors.sky,
       red: Colors.rose,
     },

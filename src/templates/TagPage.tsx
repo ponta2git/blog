@@ -55,7 +55,7 @@ export const query = graphql`
             tags
             title
           }
-          excerpt(pruneLength: 50)
+          excerpt(pruneLength: 100)
           parent {
             ... on File {
               name

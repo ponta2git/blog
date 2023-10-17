@@ -12,7 +12,7 @@ const IndexPage: React.FC = () => {
       allMdx(sort: { frontmatter: { date: DESC } }) {
         edges {
           node {
-            excerpt(pruneLength: 80)
+            excerpt(pruneLength: 100)
             frontmatter {
               date(formatString: "YYYY/MM/DD")
               tags

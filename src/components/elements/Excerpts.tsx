@@ -18,13 +18,13 @@ const Excerpts: React.FC<ExcerptContent> = ({
   excerpt,
   addr,
 }) => (
-  <article className="py-2 flex flex-col gap-y-1">
+  <article className="pb-4 flex flex-col gap-y-1">
     <h2 className="text-2xl leading-tight tracking-tight font-bold text-red-800 hover:text-red-700 transition-colors ease-in-out duration-200">
       <Link to={`/blog/${addr}`}>{title}</Link>
     </h2>
     <p className="text-xs leading-tight text-gray-500">{date}</p>
     <PostTags tags={tags} />
-    <p className="leading-7 tracking-wide">{excerpt}</p>
+    <p className="text-base leading-7 tracking-normal">{excerpt}</p>
   </article>
 );
 
