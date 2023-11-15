@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import PostTags from "../../components/elements/PostTags";
+import PostTagList from "../../components/elements/PostTagList";
 
-const meta: Meta<typeof PostTags> = {
-  component: PostTags,
+const meta: Meta<typeof PostTagList> = {
+  component: PostTagList,
 };
 export default meta;
 
-type Story = StoryObj<typeof PostTags>;
+type Story = StoryObj<typeof PostTagList>;
 
 export const Story: Story = {
   args: {

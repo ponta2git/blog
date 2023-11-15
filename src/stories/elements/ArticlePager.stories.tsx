@@ -13,11 +13,11 @@ export const Story: Story = {
   args: {
     previous: {
       title: "",
-      name: "hoge",
+      fileName: "hoge",
     },
     next: {
       title: "",
-      name: "hoge",
+      fileName: "hoge",
     },
   },
 };

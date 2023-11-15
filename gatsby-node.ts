@@ -2,9 +2,9 @@ import type { GatsbyNode } from "gatsby";
 import path from "path";
 import type {
   PageNodeContext,
-  TagNodeContext,
   PostEdge,
   TagEdge,
+  TagNodeContext,
 } from "./src/node-types";
 
 export const createPages: GatsbyNode["createPages"] = async ({
@@ -12,7 +12,6 @@ export const createPages: GatsbyNode["createPages"] = async ({
   graphql,
 }) => {
   const { data } = await graphql<PageNodeQuery>(ql);
-
   if (!data) return;
 
   const postTemplate = path.resolve("./src/templates/BlogPost.tsx");

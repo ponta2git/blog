@@ -1,5 +1,5 @@
 import React from "react";
-import { ArticleTags, TagNodeContext } from "../node-types";
+import { TagNodeContext } from "../node-types";
 import { PageProps, graphql } from "gatsby";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTag } from "@fortawesome/free-solid-svg-icons";
@@ -7,35 +7,26 @@ import { faTag } from "@fortawesome/free-solid-svg-icons";
 import Layout from "../components/Layout";
 import Contents from "../components/elements/Contents";
 import Excerpts from "../components/elements/Excerpts";
+import { ArticleMetadataFactory } from "../factories/ArticleMetadataFactory";
 
 const TagPage: React.FC<PageProps<Queries.TagPageQuery, TagNodeContext>> = ({
   data,
   pageContext,
 }) => {
-  const { edges } = data.allMdx;
   const { tag } = pageContext;
+  const metas = data.allMdx.edges.map((edge) =>
+    ArticleMetadataFactory.create(edge.node)
+  );
+
   return (
     <Layout pageTitle={`タグ：${tag}`}>
       <Contents>
         <p>
           <FontAwesomeIcon icon={faTag} /> {tag}
         </p>
-        {edges &&
-          edges.map((edge, idx) => {
-            const { frontmatter, excerpt, parent } = edge.node;
-            if (!frontmatter || !parent) return null;
-
-            return (
-              <Excerpts
-                key={idx}
-                title={frontmatter?.title ?? ""}
-                date={frontmatter?.date ?? ""}
-                tags={(frontmatter?.tags as ArticleTags) ?? []}
-                excerpt={excerpt ?? ""}
-                addr={(parent as { name: string }).name}
-              />
-            );
-          })}
+        {metas.map((meta, idx) => (
+          <Excerpts key={idx} metadata={meta} />
+        ))}
       </Contents>
     </Layout>
   );
@@ -49,7 +40,6 @@ export const query = graphql`
     ) {
       edges {
         node {
-          id
           frontmatter {
             date(formatString: "YYYY/MM/DD")
             tags

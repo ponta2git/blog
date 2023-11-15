@@ -3,22 +3,28 @@ import { graphql, PageProps } from "gatsby";
 import { MDXProvider } from "@mdx-js/react";
 import { MDXComponents } from "mdx/types";
 
+import { PageNodeContext } from "../node-types";
+
 import Layout from "../components/Layout";
 import CodeBlock from "../components/elements/CodeBlock";
-import PostTags from "../components/elements/PostTags";
+import PostTagList from "../components/elements/PostTagList";
 import ArticlePager from "../components/elements/ArticlePager";
-import { ArticleTags, PageNodeContext } from "../node-types";
 import Contents from "../components/elements/Contents";
+import { NeighborFactory } from "../factories/NeighborFactory";
+import { ArticleMetadataFactory } from "../factories/ArticleMetadataFactory";
 
 const BlogPost: React.FC<PageProps<Queries.BlogPostQuery, PageNodeContext>> = ({
   data,
   pageContext,
   children,
 }) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { frontmatter } = data.mdx as { frontmatter: any };
+  if (!data.mdx) throw new Error("GraphQL in BlogPost is not correct.");
+  const { frontmatter } = ArticleMetadataFactory.create(data.mdx);
   const { date, tags, title } = frontmatter;
-  const { next, previous } = pageContext;
+
+  const { next: contextNext, previous: contextPrev } = pageContext;
+  const next = NeighborFactory.create(contextNext);
+  const previous = NeighborFactory.create(contextPrev);
 
   const components: MDXComponents = {
     code: (props: HTMLProps<HTMLElement>) => <CodeBlock {...props} />,
@@ -49,7 +55,7 @@ const BlogPost: React.FC<PageProps<Queries.BlogPostQuery, PageNodeContext>> = ({
           {title}
         </h2>
         <p className="text-xs leading-tight text-gray-500">{date}</p>
-        <PostTags tags={tags satisfies ArticleTags} />
+        <PostTagList tags={tags} />
       </div>
 
       <Contents>
