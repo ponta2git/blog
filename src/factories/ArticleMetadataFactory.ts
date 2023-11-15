@@ -25,8 +25,7 @@ export class ArticleMetadataFactory {
     const validNode = hasProps(node) ? node : null;
     if (!validNode) throw error;
 
-    const excerpt = hasValue(validNode.excerpt) ? validNode.excerpt : null;
-    if (!excerpt) throw error;
+    const excerpt = hasValue(validNode.excerpt) ? validNode.excerpt : undefined;
 
     const frontmatter = hasProps(validNode.frontmatter)
       ? validNode.frontmatter
