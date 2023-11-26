@@ -1,5 +1,6 @@
 import React, { HTMLProps } from "react";
 import { graphql, PageProps } from "gatsby";
+import { StaticImage } from "gatsby-plugin-image";
 import { MDXProvider } from "@mdx-js/react";
 import { MDXComponents } from "mdx/types";
 
@@ -44,6 +45,14 @@ const BlogPost: React.FC<PageProps<Queries.BlogPostQuery, PageNodeContext>> = ({
       <a
         className={`text-red-700 hover:text-red-900 duration-200 transition-colors ease-in-out ${className}`}
         {...props}
+      />
+    ),
+    img: ({ className, src, alt }: HTMLProps<HTMLImageElement>) => (
+      <StaticImage
+        imgClassName={`rounded-sm ${className}`}
+        src={src ?? ""}
+        alt={alt ?? ""}
+        loading="lazy"
       />
     ),
   };
