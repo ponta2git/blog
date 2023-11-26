@@ -1,5 +1,5 @@
 import React from "react";
-import { TagNodeContext } from "../node-types";
+import { TagNodeContext } from "../types/nodes";
 import { PageProps, graphql } from "gatsby";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTag } from "@fortawesome/free-solid-svg-icons";

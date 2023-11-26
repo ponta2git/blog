@@ -1,6 +1,6 @@
 import { Link } from "gatsby";
 import React from "react";
-import { SiteHeader } from "../node-types";
+import { SiteHeader } from "../types/nodes";
 
 const Header: React.FC<SiteHeader> = ({ siteName }) => (
   <header className="px-5 lg:px-20 py-10">

@@ -3,7 +3,7 @@ import { graphql, PageProps } from "gatsby";
 import { MDXProvider } from "@mdx-js/react";
 import { MDXComponents } from "mdx/types";
 
-import { PageNodeContext } from "../node-types";
+import { PageNodeContext } from "../types/nodes";
 
 import Layout from "../components/Layout";
 import CodeBlock from "../components/elements/CodeBlock";

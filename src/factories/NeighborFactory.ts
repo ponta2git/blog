@@ -1,4 +1,4 @@
-import { EdgeFrontmatter } from "../node-types";
+import { EdgeFrontmatter } from "../types/nodes";
 import { Neighbor } from "../types";
 
 export class NeighborFactory {

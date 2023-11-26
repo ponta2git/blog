@@ -5,7 +5,7 @@ import type {
   PostEdge,
   TagEdge,
   TagNodeContext,
-} from "./src/node-types";
+} from "./src/types/nodes";
 
 export const createPages: GatsbyNode["createPages"] = async ({
   actions,

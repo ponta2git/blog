@@ -3,7 +3,9 @@ import remarkGfm from "remark-gfm";
 
 const config: GatsbyConfig = {
   trailingSlash: "never",
-  graphqlTypegen: true,
+  graphqlTypegen: {
+    typesOutputPath: "src/types/gatsby.d.ts",
+  },
   siteMetadata: {
     siteUrl: "https://nponta.info",
     title: "Life in the Fast Lane",
