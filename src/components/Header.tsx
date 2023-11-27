@@ -1,8 +1,11 @@
 import { Link } from "gatsby";
 import React from "react";
-import { SiteHeader } from "../types/nodes";
 
-const Header: React.FC<SiteHeader> = ({ siteName }) => (
+type HeaderProps = {
+  siteName: string;
+};
+
+const Header: React.FC<HeaderProps> = ({ siteName }) => (
   <header className="px-5 lg:px-20 py-10">
     <h1 className="font-['Hahmlet'] text-lg first-letter:text-2xl">
       <Link to={"/"}>
