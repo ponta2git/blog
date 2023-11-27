@@ -15,7 +15,7 @@ const TagPage: React.FC<PageProps<Queries.TagPageQuery, TagNodeContext>> = ({
 }) => {
   const { tag } = pageContext;
   const metas = data.allMdx.edges.map((edge) =>
-    ArticleMetadataFactory.create(edge.node)
+    ArticleMetadataFactory.create(edge.node),
   );
 
   return (

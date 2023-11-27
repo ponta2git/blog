@@ -2,7 +2,7 @@ import type { GatsbyConfig } from "gatsby";
 import remarkGfm from "remark-gfm";
 
 const config: GatsbyConfig = {
-  trailingSlash: "never",
+  trailingSlash: "always",
   graphqlTypegen: {
     typesOutputPath: "src/types/gatsby.d.ts",
   },

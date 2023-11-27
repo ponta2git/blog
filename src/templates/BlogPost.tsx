@@ -46,7 +46,7 @@ const BlogPost: React.FC<PageProps<Queries.BlogPostQuery, PageNodeContext>> = ({
         {...props}
       />
     ),
-    img: ({ className, ...props }: HTMLProps<HTMLImageElement>) => (
+    img: (props: HTMLProps<HTMLImageElement>) => (
       <img loading="lazy" {...props} />
     ),
   };
